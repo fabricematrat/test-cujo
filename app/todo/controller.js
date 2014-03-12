@@ -4,6 +4,7 @@ define(function (require, exports, module) {
 	module.exports = TodosController;
 
 	var csst = require('csst');
+	var form = require('cola/dom/form');
 	var slice = Array.prototype.slice;
 	var update = csst.lift(csst.toggle('hidden'));
 	var state = false;
@@ -11,35 +12,22 @@ define(function (require, exports, module) {
 	function TodosController() {
 	}
 
-	TodosController.prototype.load = function() {
-		console.log("load all todos" + this.model);
-		// using the store !!!
-		// instead of that !!!
-		this.model.add({id: '1',description: "titi", complete: false});
-		this.model.add({id: '2', description: "titi2", complete: false});
-		this.model.add({id: '3', description: "titi3", complete: true});
-		this.model.add({id: '4', description: "titi4", complete: true});
-	};
-	
 	TodosController.prototype.displayView = function() {
-		document.querySelector('.todo-display').reset();
+		this._form.reset();
 		changeView('.todo-display');
 	};
 
 	TodosController.prototype.display = function(todo) {
 		this.displayView();
 		if (todo != null) {
-			this._updateForm(document.querySelector('.todo-display'), todo);
+			this._updateForm(this._form, todo);
 		}
-		console.log("in todos display" + todo);
 	};
 
-	TodosController.prototype.save = function(todo) {
+	TodosController.prototype.save = TodosController.prototype.delete = function() {
+		var todo = form.getValues(this._form);
 		changeView('.todos-list');
-	};
-
-	TodosController.prototype.delete = function(todo) {
-		changeView('.todos-list');
+		return todo;
 	};
 
 	TodosController.prototype.cancel = function(todos, todo) {

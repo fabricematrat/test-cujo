@@ -29,11 +29,15 @@ define({
             }
         }
     },
+    todosForm: {
+        element: { $ref: 'dom.first!form', at: 'todoSectionView' }
+    },
     todoController: {
         create: 'app/todo/controller',
 		properties: {
 			model: { $ref: "todos"},
 			store: { $ref: "todoStore"},
+            _form: { $ref: "todosForm"},
 			_updateForm: { $ref: 'form.setValues' }
 		},
         on: {
@@ -41,22 +45,28 @@ define({
                 'click:.display': 'todos.edit',
                 'click:.add': 'displayView',
                 'click:.cancel': 'cancel',
-                'click:.save': 'save',
-                'click:.delete': 'delete'
+                'click:.save': 'save | todos.update',
+                'click:.delete': 'delete | todos.remove'
 			},
 			controllerView: {
                 'click:.todo': 'display'
 			}
 		},
 		connect :{
-			'todos.onEdit': "display"
-		},
-		ready : "load"		
+            'todos.onEdit': "display"
+		}		
 	},
     todoStore: {
 		create: {
-			module: '../LocalStorage'
-		}
+			module: '../AeroGearCore',
+            properties: {
+                "toto": "titi"
+            }
+
+		},
+        bind: {
+            to: { $ref: 'todos' }
+        }
     },
 	form: { module: 'cola/dom/form' },
 	// Wire.js plugins
