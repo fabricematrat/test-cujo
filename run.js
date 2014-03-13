@@ -27,7 +27,7 @@
 			{ name: 'when', location: 'bower_components/when', main: 'when' },
 			{ name: 'meld', location: 'bower_components/meld', main: 'meld' },
 			{ name: 'csst', location: 'bower_components/csst', main: 'css', config: { moduleLoader: 'curl/loader/cjsm11' } },
-			{ name: 'aerogear', location: 'bower_components/aerogear', main: 'aerogear.min.js', config: { moduleLoader: 'curl/loader/legacy', exports: 'AeroGear'} },
+			{ name: 'aerogear', location: 'bower_components/aerogear', main: 'aerogear.js', config: { moduleLoader: 'curl/loader/legacy', exports: 'AeroGear'} },
 			{ name: 'poly', location: 'bower_components/poly' }
 		],
 		// Turn off i18n locale sniffing. Change or remove this line if you want

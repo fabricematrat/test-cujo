@@ -35,18 +35,17 @@ define({
     todoController: {
         create: 'app/todo/controller',
 		properties: {
-			model: { $ref: "todos"},
-			store: { $ref: "todoStore"},
             _form: { $ref: "todosForm"},
 			_updateForm: { $ref: 'form.setValues' }
 		},
         on: {
             todoSectionView: {
                 'click:.display': 'todos.edit',
-                'click:.add': 'displayView',
+                'click:.displayAdd': 'displayView',
                 'click:.cancel': 'cancel',
-                'click:.save': 'save | todos.update',
-                'click:.delete': 'delete | todos.remove'
+                'click:.add': 'save | todos.add',
+                'click:.update': 'save | todos.update',
+                'click:.remove': 'save | todos.remove'
 			},
 			controllerView: {
                 'click:.todo': 'display'
@@ -59,10 +58,7 @@ define({
     todoStore: {
 		create: {
 			module: '../AeroGearCore',
-            properties: {
-                "toto": "titi"
-            }
-
+			args: ['http://localhost:8080/mytodo/', 'todos', {type:'SessionLocal', settings :{storageType:'localStorage'}}]
 		},
         bind: {
             to: { $ref: 'todos' }

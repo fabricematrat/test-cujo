@@ -8,38 +8,54 @@ define(function (require, exports, module) {
 	var slice = Array.prototype.slice;
 	var update = csst.lift(csst.toggle('hidden'));
 	var state = false;
+	var stateAdd = false;
+	var stateUpdate = false;
 
 	function TodosController() {
 	}
 
 	TodosController.prototype.displayView = function() {
 		this._form.reset();
-		changeView('.todo-display');
+		changeView('.todo-display', 'add');
 	};
 
 	TodosController.prototype.display = function(todo) {
-		this.displayView();
-		if (todo != null) {
-			this._updateForm(this._form, todo);
-		}
+		this._form.reset();
+		this._updateForm(this._form, todo);
+		changeView('.todo-display', 'update');
 	};
 
 	TodosController.prototype.save = TodosController.prototype.delete = function() {
 		var todo = form.getValues(this._form);
-		changeView('.todos-list');
+		todo.id = parseInt(todo.id);
+		changeView('.todos-list', 'list');
 		return todo;
 	};
 
 	TodosController.prototype.cancel = function(todos, todo) {
-		changeView('.todos-list');
+		changeView('.todos-list', 'list');
 	};
 
-	function changeView(view) {
+	function changeView(view, action) {
 		var buttonsElement = document.querySelectorAll('.todos-element');
+		var buttonsElementUpdate = document.querySelectorAll('.todos-element-update');
+		var buttonsElementAdd = document.querySelectorAll('.todos-element-add');
 		var buttonsList = document.querySelectorAll('.todos-list');
 		slice.call(buttonsElement, 0).forEach(function(node){
 			update(state, node);
 		});
+		if(action === 'update' || (action === 'list' && stateUpdate) ) {
+			slice.call(buttonsElementUpdate, 0).forEach(function(node){
+				update(stateUpdate, node);
+			});
+			stateUpdate = !stateUpdate;
+		}
+		if(action === 'add' || (action === 'list' && stateAdd)) {
+			slice.call(buttonsElementAdd, 0).forEach(function(node){
+				update(stateAdd, node);
+			});
+			stateAdd = !stateAdd;
+		}
 		slice.call(buttonsList, 0).forEach(function(node){
 			update(!state, node);
 		});

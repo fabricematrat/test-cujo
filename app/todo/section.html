@@ -27,21 +27,25 @@
 		</label>
 		<input class="hidden" name="id"/>
 		<input class="hidden" name="version"/>
+		<input class="hidden" name="class"/>
 		<br/><br/>
 	</form>	
 	
     <footer class="topcoat-tab-bar full bottom">
         <div class="topcoat-tab-bar__item todos-list">
-            <button class="topcoat-button full add" >Add</button>
+            <button class="topcoat-button full displayAdd" >Add</button>
         </div>
         <div class="topcoat-tab-bar__item todos-element hidden ">
             <button class="topcoat-button full cancel">Cancel</button>
         </div>
-        <div class="topcoat-tab-bar__item todos-element hidden ">
-            <button class="topcoat-button full delete">Delete</button>
+        <div class="topcoat-tab-bar__item todos-element-update hidden ">
+            <button class="topcoat-button full remove">Delete</button>
         </div>
-        <div class="topcoat-tab-bar__item todos-element hidden">
-            <button class="topcoat-button full save">Save</button>
+        <div class="topcoat-tab-bar__item todos-element-add hidden">
+            <button class="topcoat-button full add">Add</button>
+        </div>
+        <div class="topcoat-tab-bar__item todos-element-update hidden">
+            <button class="topcoat-button full update">Update</button>
         </div>
     </footer>
 </section>
