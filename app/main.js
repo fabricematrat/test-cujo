@@ -5,7 +5,7 @@ define({
     ]},
     controllerView: {
         render: {
-            template: { module: 'text!app/controller/template.html' },
+            template: { module: 'text!app/controller/template.html' }
         },
         insert: { at: 'dom.first!body' }
     },
@@ -19,7 +19,7 @@ define({
     todos: { create: 'cola/Collection' },
     todoSectionView: {
         render: {
-            template: { module: 'text!app/todo/section.html' },
+            template: { module: 'text!app/todo/section.html' }
         },
         insert: { after: 'controllerView' },
         bind: {
