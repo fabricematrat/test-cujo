@@ -25,9 +25,11 @@ define(function (require, exports, module) {
 		changeView('.todo-display', 'update');
 	};
 
+	var clientId = 0;
 	TodosController.prototype.save = TodosController.prototype.delete = function() {
 		var todo = form.getValues(this._form);
-		todo.id = parseInt(todo.id);
+//		todo.id = parseInt(todo.id);
+		todo._clientId = ++clientId;
 		changeView('.todos-list', 'list');
 		return todo;
 	};

@@ -24,8 +24,13 @@ define({
         insert: { after: 'controllerView' },
         bind: {
             to: { $ref: 'todos' },
+			identifier: '_clientId',
+			comparator: '_clientId',
             bindings : {
-                description: ".description"
+				description: ".description",
+				// For debugging
+				_clientId: '.clientId',
+				id: '.serverId'
             }
         }
     },
@@ -57,11 +62,12 @@ define({
 	},
     todoStore: {
 		create: {
-			module: '../AeroGearCore',
-			args: ['http://localhost:8080/mytodo/', 'todos', {type:'SessionLocal', settings :{storageType:'localStorage'}}]
+			module: '../FakeAdapter'
+//			args: ['http://localhost:8080/mytodo/', 'todos', {type:'SessionLocal', settings :{storageType:'localStorage'}}]
 		},
         bind: {
-            to: { $ref: 'todos' }
+            to: { $ref: 'todos' },
+			identifier: '_clientId'
         }
     },
 	form: { module: 'cola/dom/form' },
