@@ -16,7 +16,13 @@ define({
 			}
 		}
 	},
-    todos: { create: 'cola/Collection' },
+    todos: {
+		create: {
+			module: 'cola/Collection'
+			,
+			args: { strategy: { create: '../fakeStrategy' } }
+		}
+	},
     todoSectionView: {
         render: {
             template: { module: 'text!app/todo/section.html' }
